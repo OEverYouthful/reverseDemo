@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CfgJobCmdMapMapper">
+  <resultMap id="BaseResultMap" type="pojo.CfgJobCmdMap">
+    <result column="cfg_job_id" jdbcType="VARCHAR" property="cfgJobId" />
+    <result column="cfg_job_cmd_id" jdbcType="VARCHAR" property="cfgJobCmdId" />
+    <result column="relation" jdbcType="VARCHAR" property="relation" />
+    <result column="job_type" jdbcType="VARCHAR" property="jobType" />
+    <result column="lib_path" jdbcType="VARCHAR" property="libPath" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="pojo.CfgJobCmdMap">
+    <result column="cmd" jdbcType="LONGVARCHAR" property="cmd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cfg_job_id, cfg_job_cmd_id, relation, job_type, lib_path, create_user, create_time, 
+    update_user, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    cmd
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="pojo.CfgJobCmdMapExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="pojo.CfgJobCmdMapExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.CfgJobCmdMapExample">
+    delete from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.CfgJobCmdMap">
+    insert into cfg_job_cmd_map (cfg_job_id, cfg_job_cmd_id, relation, 
+      job_type, lib_path, create_user, 
+      create_time, update_user, update_time, 
+      cmd)
+    values (#{cfgJobId,jdbcType=VARCHAR}, #{cfgJobCmdId,jdbcType=VARCHAR}, #{relation,jdbcType=VARCHAR}, 
+      #{jobType,jdbcType=VARCHAR}, #{libPath,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{cmd,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.CfgJobCmdMap">
+    insert into cfg_job_cmd_map
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        cfg_job_id,
+      </if>
+      <if test="cfgJobCmdId != null">
+        cfg_job_cmd_id,
+      </if>
+      <if test="relation != null">
+        relation,
+      </if>
+      <if test="jobType != null">
+        job_type,
+      </if>
+      <if test="libPath != null">
+        lib_path,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="cmd != null">
+        cmd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        #{cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgJobCmdId != null">
+        #{cfgJobCmdId,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null">
+        #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="libPath != null">
+        #{libPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cmd != null">
+        #{cmd,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.CfgJobCmdMapExample" resultType="java.lang.Long">
+    select count(*) from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cfg_job_cmd_map
+    <set>
+      <if test="record.cfgJobId != null">
+        cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgJobCmdId != null">
+        cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation != null">
+        relation = #{record.relation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobType != null">
+        job_type = #{record.jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.libPath != null">
+        lib_path = #{record.libPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmd != null">
+        cmd = #{record.cmd,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cfg_job_cmd_map
+    set cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      relation = #{record.relation,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
+      lib_path = #{record.libPath,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      cmd = #{record.cmd,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cfg_job_cmd_map
+    set cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      relation = #{record.relation,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
+      lib_path = #{record.libPath,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="pojo.CfgJobCmdMap">
+    <result column="cfg_job_id" jdbcType="VARCHAR" property="cfgJobId" />
+    <result column="cfg_job_cmd_id" jdbcType="VARCHAR" property="cfgJobCmdId" />
+    <result column="relation" jdbcType="VARCHAR" property="relation" />
+    <result column="job_type" jdbcType="VARCHAR" property="jobType" />
+    <result column="lib_path" jdbcType="VARCHAR" property="libPath" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="pojo.CfgJobCmdMap">
+    <result column="cmd" jdbcType="LONGVARCHAR" property="cmd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cfg_job_id, cfg_job_cmd_id, relation, job_type, lib_path, create_user, create_time, 
+    update_user, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    cmd
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="pojo.CfgJobCmdMapExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="pojo.CfgJobCmdMapExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.CfgJobCmdMapExample">
+    delete from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.CfgJobCmdMap">
+    insert into cfg_job_cmd_map (cfg_job_id, cfg_job_cmd_id, relation, 
+      job_type, lib_path, create_user, 
+      create_time, update_user, update_time, 
+      cmd)
+    values (#{cfgJobId,jdbcType=VARCHAR}, #{cfgJobCmdId,jdbcType=VARCHAR}, #{relation,jdbcType=VARCHAR}, 
+      #{jobType,jdbcType=VARCHAR}, #{libPath,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{cmd,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.CfgJobCmdMap">
+    insert into cfg_job_cmd_map
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        cfg_job_id,
+      </if>
+      <if test="cfgJobCmdId != null">
+        cfg_job_cmd_id,
+      </if>
+      <if test="relation != null">
+        relation,
+      </if>
+      <if test="jobType != null">
+        job_type,
+      </if>
+      <if test="libPath != null">
+        lib_path,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="cmd != null">
+        cmd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        #{cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgJobCmdId != null">
+        #{cfgJobCmdId,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null">
+        #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="jobType != null">
+        #{jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="libPath != null">
+        #{libPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cmd != null">
+        #{cmd,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.CfgJobCmdMapExample" resultType="java.lang.Long">
+    select count(*) from cfg_job_cmd_map
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cfg_job_cmd_map
+    <set>
+      <if test="record.cfgJobId != null">
+        cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cfgJobCmdId != null">
+        cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation != null">
+        relation = #{record.relation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobType != null">
+        job_type = #{record.jobType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.libPath != null">
+        lib_path = #{record.libPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmd != null">
+        cmd = #{record.cmd,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cfg_job_cmd_map
+    set cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      relation = #{record.relation,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
+      lib_path = #{record.libPath,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      cmd = #{record.cmd,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cfg_job_cmd_map
+    set cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      cfg_job_cmd_id = #{record.cfgJobCmdId,jdbcType=VARCHAR},
+      relation = #{record.relation,jdbcType=VARCHAR},
+      job_type = #{record.jobType,jdbcType=VARCHAR},
+      lib_path = #{record.libPath,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

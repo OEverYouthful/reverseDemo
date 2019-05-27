@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CfgJobExecRateMapper">
+  <resultMap id="BaseResultMap" type="pojo.CfgJobExecRate">
+    <result column="cfg_job_id" jdbcType="VARCHAR" property="cfgJobId" />
+    <result column="rate_type" jdbcType="VARCHAR" property="rateType" />
+    <result column="exec_week" jdbcType="VARCHAR" property="execWeek" />
+    <result column="exec_day" jdbcType="VARCHAR" property="execDay" />
+    <result column="exec_month" jdbcType="VARCHAR" property="execMonth" />
+    <result column="exec_year" jdbcType="VARCHAR" property="execYear" />
+    <result column="day_week_rel" jdbcType="VARCHAR" property="dayWeekRel" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cfg_job_id, rate_type, exec_week, exec_day, exec_month, exec_year, day_week_rel, 
+    param_value, create_user, create_time, update_user, update_time
+  </sql>
+  <select id="selectByExample" parameterType="pojo.CfgJobExecRateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cfg_job_exec_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.CfgJobExecRateExample">
+    delete from cfg_job_exec_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.CfgJobExecRate">
+    insert into cfg_job_exec_rate (cfg_job_id, rate_type, exec_week, 
+      exec_day, exec_month, exec_year, 
+      day_week_rel, param_value, create_user, 
+      create_time, update_user, update_time
+      )
+    values (#{cfgJobId,jdbcType=VARCHAR}, #{rateType,jdbcType=VARCHAR}, #{execWeek,jdbcType=VARCHAR}, 
+      #{execDay,jdbcType=VARCHAR}, #{execMonth,jdbcType=VARCHAR}, #{execYear,jdbcType=VARCHAR}, 
+      #{dayWeekRel,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.CfgJobExecRate">
+    insert into cfg_job_exec_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        cfg_job_id,
+      </if>
+      <if test="rateType != null">
+        rate_type,
+      </if>
+      <if test="execWeek != null">
+        exec_week,
+      </if>
+      <if test="execDay != null">
+        exec_day,
+      </if>
+      <if test="execMonth != null">
+        exec_month,
+      </if>
+      <if test="execYear != null">
+        exec_year,
+      </if>
+      <if test="dayWeekRel != null">
+        day_week_rel,
+      </if>
+      <if test="paramValue != null">
+        param_value,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cfgJobId != null">
+        #{cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="rateType != null">
+        #{rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="execWeek != null">
+        #{execWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="execDay != null">
+        #{execDay,jdbcType=VARCHAR},
+      </if>
+      <if test="execMonth != null">
+        #{execMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="execYear != null">
+        #{execYear,jdbcType=VARCHAR},
+      </if>
+      <if test="dayWeekRel != null">
+        #{dayWeekRel,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.CfgJobExecRateExample" resultType="java.lang.Long">
+    select count(*) from cfg_job_exec_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cfg_job_exec_rate
+    <set>
+      <if test="record.cfgJobId != null">
+        cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rateType != null">
+        rate_type = #{record.rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execWeek != null">
+        exec_week = #{record.execWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execDay != null">
+        exec_day = #{record.execDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execMonth != null">
+        exec_month = #{record.execMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execYear != null">
+        exec_year = #{record.execYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayWeekRel != null">
+        day_week_rel = #{record.dayWeekRel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramValue != null">
+        param_value = #{record.paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cfg_job_exec_rate
+    set cfg_job_id = #{record.cfgJobId,jdbcType=VARCHAR},
+      rate_type = #{record.rateType,jdbcType=VARCHAR},
+      exec_week = #{record.execWeek,jdbcType=VARCHAR},
+      exec_day = #{record.execDay,jdbcType=VARCHAR},
+      exec_month = #{record.execMonth,jdbcType=VARCHAR},
+      exec_year = #{record.execYear,jdbcType=VARCHAR},
+      day_week_rel = #{record.dayWeekRel,jdbcType=VARCHAR},
+      param_value = #{record.paramValue,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

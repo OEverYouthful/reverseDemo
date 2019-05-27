@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CfgJobflowInfoMapper">
+  <resultMap id="BaseResultMap" type="pojo.CfgJobflowInfo">
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="require_id" jdbcType="VARCHAR" property="requireId" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="porject_name_en" jdbcType="VARCHAR" property="porjectNameEn" />
+    <result column="application_id" jdbcType="VARCHAR" property="applicationId" />
+    <result column="jobflow_name" jdbcType="VARCHAR" property="jobflowName" />
+    <result column="activate_date" jdbcType="VARCHAR" property="activateDate" />
+    <result column="plan_start_time" jdbcType="VARCHAR" property="planStartTime" />
+    <result column="plan_end_time" jdbcType="VARCHAR" property="planEndTime" />
+    <result column="batch_interval_time" jdbcType="INTEGER" property="batchIntervalTime" />
+    <result column="time_zone_en" jdbcType="VARCHAR" property="timeZoneEn" />
+    <result column="use_flag" jdbcType="VARCHAR" property="useFlag" />
+    <result column="parallel_flag" jdbcType="VARCHAR" property="parallelFlag" />
+    <result column="max_paralles" jdbcType="INTEGER" property="maxParalles" />
+    <result column="inst_time_rule" jdbcType="VARCHAR" property="instTimeRule" />
+    <result column="time_skew" jdbcType="VARCHAR" property="timeSkew" />
+    <result column="batch_num" jdbcType="INTEGER" property="batchNum" />
+    <result column="min_turn_time" jdbcType="VARCHAR" property="minTurnTime" />
+    <result column="del_sign" jdbcType="VARCHAR" property="delSign" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_id, require_id, tenant_id, porject_name_en, application_id, jobflow_name, activate_date, 
+    plan_start_time, plan_end_time, batch_interval_time, time_zone_en, use_flag, parallel_flag, 
+    max_paralles, inst_time_rule, time_skew, batch_num, min_turn_time, del_sign, description, 
+    create_user, create_time, update_user, update_time
+  </sql>
+  <select id="selectByExample" parameterType="pojo.CfgJobflowInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cfg_jobflow_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.CfgJobflowInfoExample">
+    delete from cfg_jobflow_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.CfgJobflowInfo">
+    insert into cfg_jobflow_info (group_id, require_id, tenant_id, 
+      porject_name_en, application_id, jobflow_name, 
+      activate_date, plan_start_time, plan_end_time, 
+      batch_interval_time, time_zone_en, use_flag, 
+      parallel_flag, max_paralles, inst_time_rule, 
+      time_skew, batch_num, min_turn_time, 
+      del_sign, description, create_user, 
+      create_time, update_user, update_time
+      )
+    values (#{groupId,jdbcType=VARCHAR}, #{requireId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
+      #{porjectNameEn,jdbcType=VARCHAR}, #{applicationId,jdbcType=VARCHAR}, #{jobflowName,jdbcType=VARCHAR}, 
+      #{activateDate,jdbcType=VARCHAR}, #{planStartTime,jdbcType=VARCHAR}, #{planEndTime,jdbcType=VARCHAR}, 
+      #{batchIntervalTime,jdbcType=INTEGER}, #{timeZoneEn,jdbcType=VARCHAR}, #{useFlag,jdbcType=VARCHAR}, 
+      #{parallelFlag,jdbcType=VARCHAR}, #{maxParalles,jdbcType=INTEGER}, #{instTimeRule,jdbcType=VARCHAR}, 
+      #{timeSkew,jdbcType=VARCHAR}, #{batchNum,jdbcType=INTEGER}, #{minTurnTime,jdbcType=VARCHAR}, 
+      #{delSign,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.CfgJobflowInfo">
+    insert into cfg_jobflow_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="requireId != null">
+        require_id,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="porjectNameEn != null">
+        porject_name_en,
+      </if>
+      <if test="applicationId != null">
+        application_id,
+      </if>
+      <if test="jobflowName != null">
+        jobflow_name,
+      </if>
+      <if test="activateDate != null">
+        activate_date,
+      </if>
+      <if test="planStartTime != null">
+        plan_start_time,
+      </if>
+      <if test="planEndTime != null">
+        plan_end_time,
+      </if>
+      <if test="batchIntervalTime != null">
+        batch_interval_time,
+      </if>
+      <if test="timeZoneEn != null">
+        time_zone_en,
+      </if>
+      <if test="useFlag != null">
+        use_flag,
+      </if>
+      <if test="parallelFlag != null">
+        parallel_flag,
+      </if>
+      <if test="maxParalles != null">
+        max_paralles,
+      </if>
+      <if test="instTimeRule != null">
+        inst_time_rule,
+      </if>
+      <if test="timeSkew != null">
+        time_skew,
+      </if>
+      <if test="batchNum != null">
+        batch_num,
+      </if>
+      <if test="minTurnTime != null">
+        min_turn_time,
+      </if>
+      <if test="delSign != null">
+        del_sign,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="requireId != null">
+        #{requireId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="porjectNameEn != null">
+        #{porjectNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationId != null">
+        #{applicationId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobflowName != null">
+        #{jobflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="activateDate != null">
+        #{activateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="planStartTime != null">
+        #{planStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="planEndTime != null">
+        #{planEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="batchIntervalTime != null">
+        #{batchIntervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="timeZoneEn != null">
+        #{timeZoneEn,jdbcType=VARCHAR},
+      </if>
+      <if test="useFlag != null">
+        #{useFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="parallelFlag != null">
+        #{parallelFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="maxParalles != null">
+        #{maxParalles,jdbcType=INTEGER},
+      </if>
+      <if test="instTimeRule != null">
+        #{instTimeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="timeSkew != null">
+        #{timeSkew,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNum != null">
+        #{batchNum,jdbcType=INTEGER},
+      </if>
+      <if test="minTurnTime != null">
+        #{minTurnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="delSign != null">
+        #{delSign,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.CfgJobflowInfoExample" resultType="java.lang.Long">
+    select count(*) from cfg_jobflow_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cfg_jobflow_info
+    <set>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requireId != null">
+        require_id = #{record.requireId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null">
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.porjectNameEn != null">
+        porject_name_en = #{record.porjectNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationId != null">
+        application_id = #{record.applicationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobflowName != null">
+        jobflow_name = #{record.jobflowName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activateDate != null">
+        activate_date = #{record.activateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planStartTime != null">
+        plan_start_time = #{record.planStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planEndTime != null">
+        plan_end_time = #{record.planEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchIntervalTime != null">
+        batch_interval_time = #{record.batchIntervalTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeZoneEn != null">
+        time_zone_en = #{record.timeZoneEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useFlag != null">
+        use_flag = #{record.useFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parallelFlag != null">
+        parallel_flag = #{record.parallelFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxParalles != null">
+        max_paralles = #{record.maxParalles,jdbcType=INTEGER},
+      </if>
+      <if test="record.instTimeRule != null">
+        inst_time_rule = #{record.instTimeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeSkew != null">
+        time_skew = #{record.timeSkew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNum != null">
+        batch_num = #{record.batchNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.minTurnTime != null">
+        min_turn_time = #{record.minTurnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delSign != null">
+        del_sign = #{record.delSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cfg_jobflow_info
+    set group_id = #{record.groupId,jdbcType=VARCHAR},
+      require_id = #{record.requireId,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      porject_name_en = #{record.porjectNameEn,jdbcType=VARCHAR},
+      application_id = #{record.applicationId,jdbcType=VARCHAR},
+      jobflow_name = #{record.jobflowName,jdbcType=VARCHAR},
+      activate_date = #{record.activateDate,jdbcType=VARCHAR},
+      plan_start_time = #{record.planStartTime,jdbcType=VARCHAR},
+      plan_end_time = #{record.planEndTime,jdbcType=VARCHAR},
+      batch_interval_time = #{record.batchIntervalTime,jdbcType=INTEGER},
+      time_zone_en = #{record.timeZoneEn,jdbcType=VARCHAR},
+      use_flag = #{record.useFlag,jdbcType=VARCHAR},
+      parallel_flag = #{record.parallelFlag,jdbcType=VARCHAR},
+      max_paralles = #{record.maxParalles,jdbcType=INTEGER},
+      inst_time_rule = #{record.instTimeRule,jdbcType=VARCHAR},
+      time_skew = #{record.timeSkew,jdbcType=VARCHAR},
+      batch_num = #{record.batchNum,jdbcType=INTEGER},
+      min_turn_time = #{record.minTurnTime,jdbcType=VARCHAR},
+      del_sign = #{record.delSign,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
